@@ -1,0 +1,14 @@
+{
+  "name": "puppeteer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "puppeteer": "^10.2.0",
+    "xlsx": "^0.17.0"
+  }
+}
