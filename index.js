@@ -6,22 +6,22 @@ import XLSX from 'xlsx';
 		const page = await browser.newPage();
 		await page.goto("http://www.rpachallenge.com");
 
-		let planilha = XLSX.readFile('challenge.xlsx');
-		let colunas = XLSX.utils.sheet_to_json(planilha.Sheets[planilha.SheetNames[0]]);
+		let data = XLSX.readFile('challenge.xlsx');
+		let columns = XLSX.utils.sheet_to_json(data.Sheets[data.SheetNames[0]]);
 
-		colunas.forEach(coluna => {
-			const value = coluna['Last Name ']
-			delete coluna['Last Name ']
-			coluna['Last Name'] = value;
+		columns.forEach(column => {
+			const value = column['Last Name ']
+			delete column['Last Name ']
+			column['Last Name'] = value;
 		});
 
 		await page.click(".btn-large")
 
-		for (let coluna in colunas) {
+		for (let column in columns) {
 			for (let i = 1; i < 8; i++) {
 				let selector = `.inputFields > form > div > div:nth-child(${i})`
 				let name = await page.$eval(selector, el => el.innerText)
-				await page.type(selector + '> rpa1-field > div > input', String(colunas[coluna][name]))
+				await page.type(selector + '> rpa1-field > div > input', String(columns[column][name]))
 			}
 			await page.keyboard.press("Enter")
 		}
